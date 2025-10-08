@@ -29,48 +29,30 @@ for i in range(len(fav_foods)):
 AttributeError: 'list' object has no attribute 'upper'
 """
 
-# new_list = fav_foods[0:6:5]
-# print(new_list)
+new_list = fav_foods[0:6:5]
+print(new_list)
 
-# for i in range(len(fav_foods)):
-#     if fav_foods[i] == "potato":
-#         print("A potato!")
-#     else:
-#         print("No potato!")
+for i in range(len(fav_foods)):
+    if fav_foods[i] == "potato":
+        print("A potato!")
+    else:
+        print("No potato!")
 
-# numbers = list(range(21))
-# print(numbers)
+numbers = list(range(21))
 
-# def get_first_15(numbers):
-#     global first_15
-#     first_15 = numbers[:15]
-#     return first_15
+def get_first_15(list):
+  return list[:15]
 
-# def every_5th(first_15):
-#     global every_5th
-#     every_5th = first_15[0:15:5]
-#     return every_5th
+def get_every_5th(list):
+  return list[::5]
 
-# def reverse(every_5th):
-#     global rev
-#     rev = every_5th
-#     return rev
+def reverse_and_stride(list):
+  reversed_list = list[::-1]
+  return reversed_list[::3]
 
-# print(get_first_15(numbers))
-# print(every_5th(first_15))
-# print(reverse(rev))
-
-"""
-  File "/Users/hjugan/Desktop/School/2025/Fall/ASTRO 98/Python_DeCal_fa25/henry/homework4/homework4.py", line 53, in <module>
-    print(every_5th(first_15))
-                    ^^^^^^^^
-NameError: name 'first_15' is not defined
-I didn't make a global variable named first 15
-My code was: 
-def get_first_15(numbers):
-    first_15 = numbers[:15]
-    return first_15
-"""
+print(get_first_15(numbers))
+print(get_every_5th(numbers))
+print(reverse_and_stride(numbers))
 
 
 numbers = [
@@ -92,43 +74,57 @@ def sum_numbers(numbers):
 
 sum_numbers(numbers)
 
-def create_five_x_five(five_x_five):
-    five_x_five = []
-    counter = 1
-    for row_num in range(5):
-        new_row = []
-        for col_num in range(5):
-            new_row.append(counter)
-            counter += 1
-        five_x_five.append(new_row)
+def create_grid():
+  grid = []
+  number = 1
+  for _ in range(5):
+    row = []
+    for _ in range(5):
+      row.append(number)
+      number += 1
+    grid.append(row)
+  return grid
 
-    return five_x_five
+def replace_multiples_of_three(grid):
+  new_grid = []
+  for row in grid:
+    new_row = []
+    for number in row:
+      if number % 3 == 0:
+        new_row.append('?')
+      else:
+        new_row.append(number)
+    new_grid.append(new_row)
+  return new_grid
 
+def sum_numbers(grid):
 
+  total_sum = 0
+  for row in grid:
+    for element in row:
+      if element != '?':
+        total_sum += element
+  return total_sum
 
-def three_to_q(five_x_five):
-    new_grid
-    new_grid = []
-    for row in five_x_five:
-        new_row = []
-        for number in five_x_five:
-            if number % 3 == 0:
-                new_row.append("?")
-            else:
-                new_row.append(number)
-        new_grid.append(new_row)
-    return new_grid
-    
-grid = []
-grid = create_five_x_five(grid)
-new_grid = three_to_q(grid)
-print("Original Grid:")
-for row in grid:
-    print(row)
+grid = create_grid()
+print(create_grid())
+question_mark_grid = replace_multiples_of_three(grid)
+print(question_mark_grid)
 
-print("\nGrid with Replacements:")
-for row in new_grid:
-    print(row)
+"""
+Traceback (most recent call last):
+  File "/Users/hjugan/Desktop/School/2025/Fall/ASTRO 98/Python_DeCal_fa25/henry/homework4/homework4.py", line 111, in <module>
+    print(replace_multiples_of_three(grid))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hjugan/Desktop/School/2025/Fall/ASTRO 98/Python_DeCal_fa25/henry/homework4/homework4.py", line 90, in replace_multiples_of_three
+    for row in grid:
+TypeError: 'function' object is not iterable
+
+I couldnt figure out how to print my functions because I couldnt pass the variable from create_grid into the other functions
+
+I FORGOT THE FREAKING () AFTER CREATE_GRID WHEN I CALLED THE FUNCTION WHYYYYY CRUEL WORLDDDDDD
+
+"""
 
 
 ages = {
@@ -138,4 +134,14 @@ ages = {
 "Mira": 48
 }
 
-print(ages.["Katie"])
+print(ages["Katie"])
+ages["Mira"] = 100
+ages["Milana"] = 52
+del ages["Mariam"]
+
+print(ages)
+
+for name, age in ages.items():
+  print(f"{name} is {age} years old.")
+
+  
